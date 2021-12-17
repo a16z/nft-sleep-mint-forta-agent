@@ -1,0 +1,11 @@
+node_modules
+dist
+forta.config.json
+**/.DS_Store
+.vscode
+**/node_modules/
+**/.env
+**/cache/
+**/.ipynb_checkpoints
+**/__pycache__
+**/artifacts/
