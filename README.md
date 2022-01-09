@@ -14,16 +14,17 @@ Describe each of the type of alerts fired by this agent
 
 - SLEEPMINT-1
   - Fired when a transaction consumes more gas than 1,000,000 gas
-  - Severity is always set to "medium" (mention any conditions where it could be something else)
-  - Type is always set to "suspicious" (mention any conditions where it could be something else)
-  - Mention any other type of metadata fields included with this alert
+  - Severity is always set to "unknown". There may cases where a person is approved to transfer an NFT on another person's behalf.
+  - Type is always set to "suspicious". There may cases where a person is approved to transfer an NFT on another person's behalf.
 
 - SLEEPMINT-2
-  - Fired when
+  - Fired when there is an approval for transfering an NFT owned by another person and this approval was not initiated by the current NFT owner.
+  - Severity is always set to "medium".
+  - Type is always set to "suspicious".
 
 ## Test Data
 
 The agent behaviour can be verified with the following transactions:
 
-- 0x57f23fde8e4221174cfb1baf68a87858167fec228d9b32952532e40c367ef04e
-- 0x0 (on Rinkeby Testnet)
+- SLEEPMINT-1: 0x57f23fde8e4221174cfb1baf68a87858167fec228d9b32952532e40c367ef04e
+- SLEEPMINT-2 (on Rinkeby Testnet): 0x0
