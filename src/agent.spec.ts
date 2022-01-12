@@ -10,24 +10,27 @@ import agent from "./agent"
 import {ethers} from 'ethers';
 
 describe("NFT Sleep agent", () => {
+
   let handleTransaction: HandleTransaction
 
   let abiCoder: ethers.utils.AbiCoder
+
   let transferTopic = '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'
   let approveTopic = '0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925'
 
-  let txnSender = "0x87F6cA7862feA6411de6c0aFc1b4b23DD802bf00"
-  let famousArtist = "0xc6b0562605D35eE710138402B878ffe6F2E23807"
-  let thirdParty = "0xd8dB81216D8cf1236d36B4A1c328Fbd5CB2bD1e7"
-  let NFTContractAddress = "0x5fbbacf00ef20193a301a5ba20acf04765fb6dac"
+  let txnSender = "0x87F6cA7862feA6411de6c0aFc1b4b23DD802bf00".toLowerCase()
+  let famousArtist = "0xc6b0562605D35eE710138402B878ffe6F2E23807".toLowerCase()
+  let thirdParty = "0xd8dB81216D8cf1236d36B4A1c328Fbd5CB2bD1e7".toLowerCase()
+  let NFTContractAddress = "0x23414f4f9cb421b952c9050f961801bb2c8b8d58".toLowerCase()
 
+  // construct a transaction event for testing with event logs
   const createTxEvent = (from:string, to:string, logs: any) => createTransactionEvent({
     transaction: {from, to} as any,
     receipt: { logs } as any,
     block: {} as any,
   })
 
-
+  // construct a log object for a transaction event 
   const createLog = (address: string, topics: string[]) => {
     return {
       address: address,
@@ -72,7 +75,7 @@ describe("NFT Sleep agent", () => {
 
       expect(findings).toStrictEqual([
         Finding.fromObject({
-          name: "Sleeping Minted an NFT",
+          name: "Sleep Minted an NFT",
           description: `An NFT Transfer was initiated by ${txnSender} to transfer an NFT owned by ${famousArtist}`,
           alertId: "SLEEPMINT-1",
           severity: FindingSeverity.Unknown,
@@ -104,8 +107,8 @@ describe("NFT Sleep agent", () => {
 
       expect(findings).toStrictEqual([
         Finding.fromObject({
-          name: "Sleeping Minted an NFT",
-          description: `An NFT was approved for ${txnSender} but owned by ${famousArtist}.`,
+          name: "Sleep Minted an NFT",
+          description: `An NFT was approved for ${txnSender}, by ${txnSender}, but owned by ${famousArtist}.`,
           alertId: "SLEEPMINT-2",
           severity: FindingSeverity.Medium,
           type: FindingType.Suspicious

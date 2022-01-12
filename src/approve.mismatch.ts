@@ -16,30 +16,32 @@ import {
     const findings: Finding[] = []
 
     const contractAddress: string = txEvent.to as string
-    const txnSender = txEvent.from
+    const txnSender = txEvent.from.toLowerCase()
   
     // get all approve and approveForAll event logs
     let approvals = txEvent.filterLog(APPROVE_EVENT, contractAddress);
     const approvalForAlls = txEvent.filterLog(APPROVEAL_FOR_ALL_EVENT, contractAddress)
-    approvals.concat(approvalForAlls)
-  
+    
     for (let approve of approvals){
+
       // get the current owner of an NFT 
-      const currentNFTOwner = approve.args.owner
+      const currentNFTOwner = approve.args.owner.toLowerCase()
 
       // get the address approved to transfer the NFT
-      const approvedAddress= approve.args.approved
-
-      // check if the txn sender is not the current NFT owner and if the txn sender is approving themselves to transfer another person's NFT
+      const approvedAddress= approve.args.approved.toLowerCase()
+     
+      // check if the txn sender is not the current NFT owner
+      // check if the txn sender is approving themselves to transfer another person's NFT
       if (currentNFTOwner != txnSender && approvedAddress == txnSender){
           findings.push(Finding.fromObject({
-            name: "Sleeping Minted an NFT",
-            description: `An NFT was approved for ${txnSender} but owned by ${currentNFTOwner}.`,
+            name: "Sleep Minted an NFT",
+            description: `An NFT was approved for ${txnSender}, by ${txnSender}, but owned by ${currentNFTOwner}.`,
             alertId: "SLEEPMINT-2",
             severity: FindingSeverity.Medium,
             type: FindingType.Suspicious
           })) 
       }   
+
   }
     
   return findings

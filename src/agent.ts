@@ -18,6 +18,7 @@ import ERC721_ABI from "./ERC721_ABI.json";
 const handleTransaction: HandleTransaction = async (txEvent: TransactionEvent) => {
   let findings: Finding[] = []
 
+  // create an ethers contract object to check if it is an ERC-721 contract
   const to: string = txEvent.to as string
   let contract: Contract = new ethers.Contract(to, ERC721_ABI, getEthersProvider())
 
@@ -27,7 +28,7 @@ const handleTransaction: HandleTransaction = async (txEvent: TransactionEvent) =
     return findings
   })
 
-  // check to see if the contract support ERC-721
+  // check to see if the contract supports ERC-721
   if (!isNFT){
     return findings
   }
