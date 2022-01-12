@@ -85,7 +85,7 @@ describe("NFT Sleep agent", () => {
     })
 
 
-    it("returns a finding of a approva mismatch", async () => {
+    it("returns a finding of an approva mismatch", async () => {
 
       // create fake approve event 
       const txEvent = createTxEvent(
@@ -118,7 +118,7 @@ describe("NFT Sleep agent", () => {
 
 
 
-    it("returns no finding if actual owner transfer the NFT", async () => {
+    it("returns no findings if actual owner transfers the NFT", async () => {
 
       // create honest approve event 
       const txEvent = createTxEvent(
@@ -143,7 +143,7 @@ describe("NFT Sleep agent", () => {
     })
 
 
-    it("returns no finding if actual owner approves another person to transfer the NFT", async () => {
+    it("returns no findings if actual owner approves another person to transfer the NFT", async () => {
 
       // create honest approve event 
       const txEvent = createTxEvent(

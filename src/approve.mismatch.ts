@@ -21,6 +21,7 @@ import {
     // get all approve and approveForAll event logs
     let approvals = txEvent.filterLog(APPROVE_EVENT, contractAddress);
     const approvalForAlls = txEvent.filterLog(APPROVEAL_FOR_ALL_EVENT, contractAddress)
+    approvals.concat(approvalForAlls)
     
     for (let approve of approvals){
 

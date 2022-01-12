@@ -3,14 +3,13 @@
 ## Description
 
 This agent detects transactions that may indicate NFT sleep minting.
+Sleep minting is a technique where someone will Mint an NFT directly to the wallet of a famous artist and then later take that NFT back. This causes NFT marketplaces to show that an NFT was created by a famous artist (as the person who minted it) even though they did not. 
 
 ## Supported Chains
 
 - Ethereum
 
 ## Alerts
-
-Describe each of the type of alerts fired by this agent
 
 - SLEEPMINT-1
   - Fired when an NFT is transfered by an address that is not the owner of the NFT.
