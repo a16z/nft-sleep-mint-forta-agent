@@ -3,11 +3,13 @@ import {
   FindingSeverity,
   Finding,
   HandleTransaction,
-  createTransactionEvent
+  createTransactionEvent,
+  getEthersProvider,
 } from "forta-agent"
 import agent from "./agent"
 
 import {ethers} from 'ethers';
+
 
 describe("NFT Sleep agent", () => {
 
@@ -21,7 +23,7 @@ describe("NFT Sleep agent", () => {
   let txnSender = "0x87F6cA7862feA6411de6c0aFc1b4b23DD802bf00".toLowerCase()
   let famousArtist = "0xc6b0562605D35eE710138402B878ffe6F2E23807".toLowerCase()
   let thirdParty = "0xd8dB81216D8cf1236d36B4A1c328Fbd5CB2bD1e7".toLowerCase()
-  let NFTContractAddress = "0x23414f4f9cb421b952c9050f961801bb2c8b8d58".toLowerCase()
+  let NFTContractAddress: string;
 
   // construct a transaction event for testing with event logs
   const createTxEvent = (from:string, to:string, logs: any) => createTransactionEvent({
@@ -45,9 +47,16 @@ describe("NFT Sleep agent", () => {
     }
   }
 
-  beforeAll(() => {
+  beforeAll(async () => {
     handleTransaction = agent.handleTransaction
     abiCoder = new ethers.utils.AbiCoder()
+    const provider = new ethers.providers.JsonRpcProvider(getEthersProvider().connection)
+    
+    // use an NFT contract on correct network to make sure first section of agent passes (checking if ERC-721)
+    let networkDetails = await provider.getNetwork()
+    NFTContractAddress = networkDetails.chainId === 4 ? "0x23414f4f9cb421b952c9050f961801bb2c8b8d58".toLowerCase() : "0x67D9417C9C3c250f61A83C7e8658daC487B56B09".toLowerCase() 
+  
+
   })
 
   describe("handleTransaction", () => {
