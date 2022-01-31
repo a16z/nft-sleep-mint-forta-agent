@@ -89,7 +89,7 @@ import {
 
 
       it("returns no findings if actual owner approves another person to transfer the NFT", async () => {
-        mockTxEvent.from = famousArtist
+        
 
         const mockERC721ApproveEvent = {
           args: {
@@ -98,7 +98,8 @@ import {
             tokenId: 1,
           },
         };
-  
+        
+        mockTxEvent.from = famousArtist
         mockTxEvent.filterLog.mockReturnValueOnce([mockERC721ApproveEvent]);
   
         const findings = await handleTransaction(mockTxEvent)

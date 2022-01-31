@@ -108,8 +108,8 @@ describe("NFT Sleep agent", () => {
           tokenId: 1,
         },
       };
+      
       mockTxEvent.from = famousArtist
-    
       mockTxEvent.filterLog.mockReturnValueOnce([mockERC721TransferEvent]);
 
       const findings = await handleTransaction(mockTxEvent)
@@ -131,8 +131,8 @@ describe("NFT Sleep agent", () => {
           tokenId: 1,
         },
       };
+
       mockTxEvent.from = famousArtist
-    
       mockTxEvent.filterLog.mockReturnValueOnce([mockERC721TransferEvent]);
 
       const findings = await handleTransaction(mockTxEvent)
