@@ -42,22 +42,22 @@ import {
           name: "Sleep Minted an NFT",
           description: `An NFT Transfer was initiated by ${txnSender} to transfer an NFT owned by ${transferFromAddress}`,
           alertId: "SLEEPMINT-1",
-          severity: FindingSeverity.Unknown,
+          severity: FindingSeverity.Info,
           type: FindingType.Suspicious
         }))
       }
 
       // if the transaction is a MINT but the NFT is minted to an address that is NOT the transaction sender
       // this might not always be malicious in the case of an airdrop where an artist mints directly to receivers of the airdrop
-      // if (isMint && !isSenderAlsoReceiver){
-      //   findings.push(Finding.fromObject({
-      //     name: "Sleep Minted an NFT",
-      //     description: `An NFT Transfer was initiated by ${txnSender} to transfer an NFT owned by ${transferFromAddress}`,
-      //     alertId: "SLEEPMINT-2",
-      //     severity: FindingSeverity.Unknown,
-      //     type: FindingType.Suspicious
-      //   }))
-      // }
+      if (isMint && !isSenderAlsoReceiver){
+        findings.push(Finding.fromObject({
+          name: "Sleep Minted an NFT",
+          description: `An NFT was minted to ${transferToAddress} but the mint transaction was sent by ${txnSender}.`,
+          alertId: "SLEEPMINT-2",
+          severity: FindingSeverity.Info,
+          type: FindingType.Suspicious
+        }))
+      }
 
 
 

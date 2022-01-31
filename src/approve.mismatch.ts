@@ -19,7 +19,7 @@ import {
     const txnSender = txEvent.from.toLowerCase()
   
     // get all approve and approveForAll event logs
-    let approvals = txEvent.filterLog(APPROVE_EVENT, contractAddress);
+    let approvals = txEvent.filterLog([APPROVE_EVENT, APPROVEAL_FOR_ALL_EVENT], contractAddress);
     const approvalForAlls = txEvent.filterLog(APPROVEAL_FOR_ALL_EVENT, contractAddress)
     approvals.concat(approvalForAlls)
     
@@ -29,7 +29,7 @@ import {
       const currentNFTOwner = approve.args.owner.toLowerCase()
 
       // get the address approved to transfer the NFT
-      const approvedAddress= approve.args.approved.toLowerCase()
+      const approvedAddress= typeof(approve.args.approved) == "boolean"? approve.args.operator.toLowerCase(): approve.args.approved.toLowerCase()
      
       // check if the txn sender is not the current NFT owner
       // check if the txn sender is approving themselves to transfer another person's NFT
