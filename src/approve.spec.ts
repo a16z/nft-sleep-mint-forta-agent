@@ -11,7 +11,8 @@ import {
   describe("NFT Sleep agent", () => {
   
     let handleTransaction: HandleTransaction
-  
+    
+    // store some addresses to use throughout tests
     let txnSender = "0x87F6cA7862feA6411de6c0aFc1b4b23DD802bf00".toLowerCase()
     let famousArtist = "0xc6b0562605D35eE710138402B878ffe6F2E23807".toLowerCase()
     let thirdParty = "0xd8dB81216D8cf1236d36B4A1c328Fbd5CB2bD1e7".toLowerCase()
@@ -98,7 +99,7 @@ import {
             tokenId: 1,
           },
         };
-        
+
         mockTxEvent.from = famousArtist
         mockTxEvent.filterLog.mockReturnValueOnce([mockERC721ApproveEvent]);
   

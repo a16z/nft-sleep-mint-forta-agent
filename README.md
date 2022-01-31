@@ -21,7 +21,7 @@ Sleep minting is a technique where someone will Mint an NFT directly to the wall
 - SLEEPMINT-2
   - Fired when an NFT is minted to an address that is not the same as the mint transaction sender.
   - Severity is always set to "info."
-  - Type if always set to "suspicious."
+  - Type is always set to "suspicious."
     - This might not always be malicious such as if there is an airdrop and an artist mints NFTs directly to airdrop receivers. 
   
 - SLEEPMINT-3
