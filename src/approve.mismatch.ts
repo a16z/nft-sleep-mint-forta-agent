@@ -18,11 +18,10 @@ import {
     const contractAddress: string = txEvent.to as string
     const txnSender = txEvent.from.toLowerCase()
   
+
     // get all approve and approveForAll event logs
-    let approvals = txEvent.filterLog([APPROVE_EVENT, APPROVEAL_FOR_ALL_EVENT], contractAddress);
-    const approvalForAlls = txEvent.filterLog(APPROVEAL_FOR_ALL_EVENT, contractAddress)
-    approvals.concat(approvalForAlls)
-    
+    let approvals = txEvent.filterLog([APPROVE_EVENT, APPROVEAL_FOR_ALL_EVENT], contractAddress) 
+
     for (let approve of approvals){
 
       // get the current owner of an NFT 
@@ -37,7 +36,7 @@ import {
           findings.push(Finding.fromObject({
             name: "Sleep Minted an NFT",
             description: `An NFT was approved for ${txnSender}, by ${txnSender}, but owned by ${currentNFTOwner}.`,
-            alertId: "SLEEPMINT-2",
+            alertId: "SLEEPMINT-3",
             severity: FindingSeverity.Medium,
             type: FindingType.Suspicious
           })) 

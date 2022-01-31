@@ -19,7 +19,7 @@ import {
     const txnSender = txEvent.from.toLowerCase()
   
     // get all transfer events from the NFT transaction
-    const transfers = txEvent.filterLog(TRANSFER_EVENT, contractAddress);
+    const transfers = txEvent.filterLog([TRANSFER_EVENT], contractAddress) 
 
     for (let transfer of transfers){
       
