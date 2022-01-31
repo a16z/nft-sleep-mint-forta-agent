@@ -41,7 +41,7 @@ describe("NFT Sleep agent", () => {
 
     it("returns a finding of a transfer mismatch", async () => {
 
-       // create fake transfer event 
+      // create fake transfer event 
       const mockERC721TransferEvent = {
         args: {
           from: famousArtist,
@@ -72,89 +72,74 @@ describe("NFT Sleep agent", () => {
     it("returns a finding of a sleep mint", async () => {
 
       // create fake transfer event 
-     const mockERC721TransferEvent = {
-       args: {
-         from: ZERO_ADDRESS,
-         to: famousArtist,
-         tokenId: 1,
-       },
-     };
-   
-     mockTxEvent.filterLog.mockReturnValueOnce([mockERC721TransferEvent]);
+      const mockERC721TransferEvent = {
+        args: {
+          from: ZERO_ADDRESS,
+          to: famousArtist,
+          tokenId: 1,
+        },
+      };
+    
+      mockTxEvent.filterLog.mockReturnValueOnce([mockERC721TransferEvent]);
 
-     const findings = await handleTransaction(mockTxEvent)
+      const findings = await handleTransaction(mockTxEvent)
 
-     expect(findings).toStrictEqual([
-       Finding.fromObject({
-          name: "Sleep Minted an NFT",
-          description: `An NFT was minted to ${famousArtist} but the mint transaction was sent by ${txnSender}.`,
-          alertId: "SLEEPMINT-2",
-          severity: FindingSeverity.Info,
-          type: FindingType.Suspicious
-        }),
-     ])
+      expect(findings).toStrictEqual([
+        Finding.fromObject({
+            name: "Sleep Minted an NFT",
+            description: `An NFT was minted to ${famousArtist} but the mint transaction was sent by ${txnSender}.`,
+            alertId: "SLEEPMINT-2",
+            severity: FindingSeverity.Info,
+            type: FindingType.Suspicious
+          }),
+      ])
 
-     expect(mockTxEvent.filterLog).toHaveBeenCalledTimes(1);
+      expect(mockTxEvent.filterLog).toHaveBeenCalledTimes(1);
    })
 
 
+    it("returns a empty finding if actual owner transfers the NFT", async () => {
 
-  
+      // create fake transfer event 
+      const mockERC721TransferEvent = {
+        args: {
+          from: famousArtist,
+          to: famousArtist,
+          tokenId: 1,
+        },
+      };
+      mockTxEvent.from = famousArtist
+    
+      mockTxEvent.filterLog.mockReturnValueOnce([mockERC721TransferEvent]);
 
-    // it("returns no findings if actual owner transfers the NFT", async () => {
+      const findings = await handleTransaction(mockTxEvent)
 
-    //   // create honest approve event 
-    //   const txEvent = createTxEvent(
-    //     famousArtist,
-    //     NFTContractAddress,
-    //     [
-    //       createLog(
-    //         NFTContractAddress,
-    //         [
-    //           transferTopic,
-    //           abiCoder.encode(["address"],[famousArtist]),
-    //           abiCoder.encode(["address"],[thirdParty]),
-    //           abiCoder.encode(["uint256"],[1])
-    //         ])
-    //     ]
-    //   )
-
-    //   const findings = await handleTransaction(txEvent)
-
-    //   expect(findings).toStrictEqual([])
-
-    // })
-
-
-    // it("returns no findings if actual owner approves another person to transfer the NFT", async () => {
-
-    //   // create honest approve event 
-    //   const txEvent = createTxEvent(
-    //     famousArtist,
-    //     NFTContractAddress,
-    //     [
-    //       createLog(
-    //         NFTContractAddress,
-    //         [
-    //           approveTopic,
-    //           abiCoder.encode(["address"],[famousArtist]),
-    //           abiCoder.encode(["address"],[thirdParty]),
-    //           abiCoder.encode(["uint256"],[1])
-    //         ])
-    //     ]
-    //   )
-
-    //   const findings = await handleTransaction(txEvent)
-
-    //   expect(findings).toStrictEqual([])
-    // })
+      expect(findings).toStrictEqual([])
+      expect(mockTxEvent.filterLog).toHaveBeenCalledTimes(1);
+    })
 
 
 
 
+    it("returns a empty finding if a person mints an NFT to themself", async () => {
 
+      // create fake transfer event 
+      const mockERC721TransferEvent = {
+        args: {
+          from: ZERO_ADDRESS,
+          to: famousArtist,
+          tokenId: 1,
+        },
+      };
+      mockTxEvent.from = famousArtist
+    
+      mockTxEvent.filterLog.mockReturnValueOnce([mockERC721TransferEvent]);
 
+      const findings = await handleTransaction(mockTxEvent)
 
+      expect(findings).toStrictEqual([])
+      expect(mockTxEvent.filterLog).toHaveBeenCalledTimes(1);
+    })
 
   })
 })

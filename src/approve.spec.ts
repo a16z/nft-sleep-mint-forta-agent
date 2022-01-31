@@ -60,6 +60,33 @@ import {
         expect(mockTxEvent.filterLog).toHaveBeenCalledTimes(1);
       })
 
+      it("returns a finds if the approval for all event fires", async () => {
+
+        const mockERC721ApproveEvent = {
+          args: {
+            owner: famousArtist,
+            operator: txnSender,
+            approved: true,
+          },
+        };
+  
+        mockTxEvent.filterLog.mockReturnValueOnce([mockERC721ApproveEvent]);
+  
+        const findings = await handleTransaction(mockTxEvent)
+   
+        expect(findings).toStrictEqual([
+            Finding.fromObject({
+              name: "Sleep Minted an NFT",
+              description: `An NFT was approved for ${txnSender}, by ${txnSender}, but owned by ${famousArtist}.`,
+              alertId: "SLEEPMINT-3",
+              severity: FindingSeverity.Medium,
+              type: FindingType.Suspicious
+             }),
+          ])
+   
+        expect(mockTxEvent.filterLog).toHaveBeenCalledTimes(1);
+      })  
+
 
       it("returns no findings if actual owner approves another person to transfer the NFT", async () => {
         mockTxEvent.from = famousArtist
@@ -79,40 +106,7 @@ import {
         expect(findings).toStrictEqual([])
    
         expect(mockTxEvent.filterLog).toHaveBeenCalledTimes(1);
-      })
-  
-  
-  
-  
-      // it("returns no findings if actual owner transfers the NFT", async () => {
-  
-      //   // create honest approve event 
-      //   const txEvent = createTxEvent(
-      //     famousArtist,
-      //     NFTContractAddress,
-      //     [
-      //       createLog(
-      //         NFTContractAddress,
-      //         [
-      //           transferTopic,
-      //           abiCoder.encode(["address"],[famousArtist]),
-      //           abiCoder.encode(["address"],[thirdParty]),
-      //           abiCoder.encode(["uint256"],[1])
-      //         ])
-      //     ]
-      //   )
-  
-      //   const findings = await handleTransaction(txEvent)
-  
-      //   expect(findings).toStrictEqual([])
-  
-      // })
-  
-  
-  
-  
-  
-  
+      })  
   
     })
   })
