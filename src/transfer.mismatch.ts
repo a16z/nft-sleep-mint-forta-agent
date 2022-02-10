@@ -18,12 +18,11 @@ import {
     const contractAddress: string = txEvent.to as string
     const txnSender = txEvent.from.toLowerCase()
   
-    // get all transfer events from the NFT transaction
+    // get all Transfer events from the NFT transaction
     const transfers = txEvent.filterLog([TRANSFER_EVENT], contractAddress) 
 
     for (let transfer of transfers){
       
-      // store the transferFrom and transferTo address that was emitted in the event log
       const transferFromAddress = transfer.args.from.toLowerCase()
       const transferToAddress = transfer.args.to.toLowerCase()
 
@@ -34,7 +33,7 @@ import {
       let isMint = transferFromAddress == ZERO_ADDRESS
 
       // is the transaction sender the person receiving the NFT in the transfer (this would be the case when you buy an NFT on OpenSea)
-      // add this check to try and reduce agent alerts from common and honest NFT transfers from opensea.
+      // add this check to try and reduce agent alerts from common and honest NFT transfers from OpenSea.
       let isSenderAlsoReceiver = transferToAddress == txnSender
 
       if (isSenderNotTheOwner && !isMint && !isSenderAlsoReceiver){
@@ -47,7 +46,7 @@ import {
         }))
       }
 
-      // if the transaction is a MINT but the NFT is minted to an address that is NOT the transaction sender
+      // if the transaction is a Mint, but the NFT is minted to an address that is NOT the transaction sender
       // this might not always be malicious in the case of an airdrop where an artist mints directly to receivers of the airdrop
       if (isMint && !isSenderAlsoReceiver){
         findings.push(Finding.fromObject({
@@ -58,7 +57,6 @@ import {
           type: FindingType.Suspicious
         }))
       }
-
 
 
     }
