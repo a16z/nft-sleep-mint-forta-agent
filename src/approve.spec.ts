@@ -91,7 +91,6 @@ import {
 
       it("returns no findings if actual owner approves another person to transfer the NFT", async () => {
         
-
         const mockERC721ApproveEvent = {
           args: {
             owner: famousArtist,
