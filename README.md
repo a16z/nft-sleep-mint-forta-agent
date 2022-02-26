@@ -2,7 +2,7 @@
 
 ## Description
 
-Forta Agent that detects transactions that may indicate NFT sleep minting.
+A Forta Agent that detects transactions that may indicate NFT sleep minting.
 Sleep minting is a technique where someone will mint an NFT directly to the wallet of a famous artist and then later take the NFT back. The on-chain provenance of the NFT might cause an NFT marketplace to show that the NFT was created (minted) by a famous artist even though it was not. 
 
 Documentation for how to build your own Forta Agent can be found [here](https://docs.forta.network/en/latest/)

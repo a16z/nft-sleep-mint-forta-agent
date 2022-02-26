@@ -9,3 +9,4 @@ forta.config.json
 **/.ipynb_checkpoints
 **/__pycache__
 **/artifacts/
+publish.log
