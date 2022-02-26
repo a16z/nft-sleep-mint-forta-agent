@@ -41,7 +41,7 @@ Documentation for how to build your own Forta Agent can be found [here](https://
 
 ## Test Data
 
-Create a file named ```forta.config.json``` in the root of the project directory that contains your own RPC endpoint from [Alchemy](https://www.alchemy.com/). Note, use an appropriate endpoint for the chain you are looking to test. For example, use a Rinkeby endpoint to test a Rinkeby transaction hash or a Mainnet endpoint if you are testing a Mainnet transaction hash. 
+Create a file named ```forta.config.json``` in the root of the project directory that contains your own RPC endpoint from [Alchemy](https://www.alchemy.com/). See the example below. Note, use an appropriate endpoint for the chain you are looking to test. For example, use a Rinkeby endpoint to test a Rinkeby transaction hash or a Mainnet endpoint to test a Mainnet transaction hash. 
 ```
 {
     "jsonRpcUrl": YOUR_RPC_ENDPOINT_HERE
