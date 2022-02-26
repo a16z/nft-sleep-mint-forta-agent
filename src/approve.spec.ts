@@ -63,7 +63,7 @@ import {
 
       it("returns a finds if the approval for all event fires", async () => {
 
-        const mockERC721ApproveEvent = {
+        const mockERC721ApproveAllEvent = {
           args: {
             owner: famousArtist,
             operator: txnSender,
@@ -71,7 +71,7 @@ import {
           },
         };
   
-        mockTxEvent.filterLog.mockReturnValueOnce([mockERC721ApproveEvent]);
+        mockTxEvent.filterLog.mockReturnValueOnce([mockERC721ApproveAllEvent]);
   
         const findings = await handleTransaction(mockTxEvent)
    
