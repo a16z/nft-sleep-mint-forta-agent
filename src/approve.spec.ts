@@ -51,7 +51,7 @@ import {
         expect(findings).toStrictEqual([
           Finding.fromObject({
             name: "Sleep Minted an NFT",
-            description: `An NFT was approved for ${txnSender}, by ${txnSender}, but owned by ${famousArtist}.`,
+            description: `An NFT was approved for ${txnSender}, by ${txnSender}, but owned by ${famousArtist}. The NFT contract address is 0x23414f4f9cb421b952c9050f961801bb2c8b8d58`,
             alertId: "SLEEPMINT-3",
             severity: FindingSeverity.Medium,
             type: FindingType.Suspicious
@@ -78,7 +78,7 @@ import {
         expect(findings).toStrictEqual([
             Finding.fromObject({
               name: "Sleep Minted an NFT",
-              description: `An NFT was approved for ${txnSender}, by ${txnSender}, but owned by ${famousArtist}.`,
+              description: `An NFT was approved for ${txnSender}, by ${txnSender}, but owned by ${famousArtist}. The NFT contract address is 0x23414f4f9cb421b952c9050f961801bb2c8b8d58`,
               alertId: "SLEEPMINT-3",
               severity: FindingSeverity.Medium,
               type: FindingType.Suspicious

@@ -35,7 +35,7 @@ import {
       if (currentNFTOwner != txnSender && approvedAddress == txnSender){
           findings.push(Finding.fromObject({
             name: "Sleep Minted an NFT",
-            description: `An NFT was approved for ${txnSender}, by ${txnSender}, but owned by ${currentNFTOwner}.`,
+            description: `An NFT was approved for ${txnSender}, by ${txnSender}, but owned by ${currentNFTOwner}. The NFT contract address is ${contractAddress}`,
             alertId: "SLEEPMINT-3",
             severity: FindingSeverity.Medium,
             type: FindingType.Suspicious

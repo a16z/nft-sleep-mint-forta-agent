@@ -39,7 +39,7 @@ import {
       if (isSenderNotTheOwner && !isMint && !isSenderAlsoReceiver){
         findings.push(Finding.fromObject({
           name: "Sleep Minted an NFT",
-          description: `An NFT Transfer was initiated by ${txnSender} to transfer an NFT owned by ${transferFromAddress}`,
+          description: `An NFT Transfer was initiated by ${txnSender} to transfer an NFT owned by ${transferFromAddress}. The NFT contract address is ${contractAddress}`,
           alertId: "SLEEPMINT-1",
           severity: FindingSeverity.Info,
           type: FindingType.Suspicious
@@ -51,7 +51,7 @@ import {
       if (isMint && !isSenderAlsoReceiver){
         findings.push(Finding.fromObject({
           name: "Sleep Minted an NFT",
-          description: `An NFT was minted to ${transferToAddress} but the mint transaction was sent by ${txnSender}.`,
+          description: `An NFT was minted to ${transferToAddress} but the mint transaction was sent by ${txnSender}. The NFT contract address is ${contractAddress}`,
           alertId: "SLEEPMINT-2",
           severity: FindingSeverity.Info,
           type: FindingType.Suspicious

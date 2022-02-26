@@ -2,8 +2,17 @@
 
 ## Description
 
-This agent detects transactions that may indicate NFT sleep minting.
+Forta Agent that detects transactions that may indicate NFT sleep minting.
 Sleep minting is a technique where someone will mint an NFT directly to the wallet of a famous artist and then later take the NFT back. The on-chain provenance of the NFT might cause an NFT marketplace to show that the NFT was created (minted) by a famous artist even though it was not. 
+
+Documentation for how to build your own Forta Agent can be found [here](https://docs.forta.network/en/latest/)
+
+## Install
+
+- ```git clone https://github.com/a16z/nft-forta-agent.git```
+- ```cd nft-forta-agent```
+- ```npm install .```
+
 
 ## Supported Chains
 
@@ -32,6 +41,13 @@ Sleep minting is a technique where someone will mint an NFT directly to the wall
 
 ## Test Data
 
+Create a file named ```forta.config.json``` in the root of the project directory that contains your own RPC endpoint from [Alchemy](https://www.alchemy.com/). Note, use an appropriate endpoint for the chain you are looking to test. For example, use a Rinkeby endpoint to test a Rinkeby transaction hash or a Mainnet endpoint if you are testing a Mainnet transaction hash. 
+```
+{
+    "jsonRpcUrl": YOUR_RPC_ENDPOINT_HERE
+}
+```
+
 The agent behavior can be verified with the following transactions:
 
 - SLEEPMINT-1 (Mainnet): 0x57f23fde8e4221174cfb1baf68a87858167fec228d9b32952532e40c367ef04e
@@ -39,6 +55,15 @@ The agent behavior can be verified with the following transactions:
 - SLEEPMINT-1 (Rinkeby): 0x3fdd4435c13672803490eb424ca93094b461ae754bd152714d5b5f58381ccd4b
 - SLEEPMINT-2 & SLEEPMINT-3 (Rinkeby): 0x53aa1bd7fa298fa1b96eeed2a4664db8934e27cd28ac0001a5bf5fa3b30c6360
 
+To test a transaction hash run the command: ```npm run tx <TRANSACTION HASH>```. For example,
+```
+npm run tx 0x57f23fde8e4221174cfb1baf68a87858167fec228d9b32952532e40c367ef04e
+```
+
 ## More
 
 Here is the smart contract that sleep minted Beeple's "First 5000 Days" NFT: https://etherscan.io/address/0x5fbbacf00ef20193a301a5ba20acf04765fb6dac
+
+
+## Disclaimer
+_This agent code is being provided as is. No guarantee, representation or warranty is being made, express or implied, as to the safety or correctness of the agent code. The agent code has not been audited and as such there can be no assurance it will work as intended, and users may experience delays, failures, errors, omissions or loss of transmitted information. THE AGENT CODE CONTAINED HEREIN ARE FURNISHED AS IS, WHERE IS, WITH ALL FAULTS AND WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING ANY WARRANTY OF MERCHANTABILITY, NON- INFRINGEMENT OR FITNESS FOR ANY PARTICULAR PURPOSE. Further, use of any of this agent code may be restricted or prohibited under applicable law, including securities laws, and it is therefore strongly advised for you to contact a reputable attorney in any jurisdiction where this agent code may be accessible for any questions or concerns with respect thereto. Further, no information provided in this repo should be construed as investment advice or legal advice for any particular facts or circumstances, and is not meant to replace competent counsel. a16z is not liable for any use of the foregoing, and users should proceed with caution and use at their own risk. See a16z.com/disclosures for more info._

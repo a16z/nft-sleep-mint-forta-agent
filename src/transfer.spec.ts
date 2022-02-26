@@ -58,7 +58,7 @@ describe("NFT Sleep agent", () => {
       expect(findings).toStrictEqual([
         Finding.fromObject({
           name: "Sleep Minted an NFT",
-          description: `An NFT Transfer was initiated by ${txnSender} to transfer an NFT owned by ${famousArtist}`,
+          description: `An NFT Transfer was initiated by ${txnSender} to transfer an NFT owned by ${famousArtist}. The NFT contract address is 0x23414f4f9cb421b952c9050f961801bb2c8b8d58`,
           alertId: "SLEEPMINT-1",
           severity: FindingSeverity.Info,
           type: FindingType.Suspicious
@@ -88,7 +88,7 @@ describe("NFT Sleep agent", () => {
       expect(findings).toStrictEqual([
         Finding.fromObject({
             name: "Sleep Minted an NFT",
-            description: `An NFT was minted to ${famousArtist} but the mint transaction was sent by ${txnSender}.`,
+            description: `An NFT was minted to ${famousArtist} but the mint transaction was sent by ${txnSender}. The NFT contract address is 0x23414f4f9cb421b952c9050f961801bb2c8b8d58`,
             alertId: "SLEEPMINT-2",
             severity: FindingSeverity.Info,
             type: FindingType.Suspicious
