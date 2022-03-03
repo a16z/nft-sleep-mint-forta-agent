@@ -46,18 +46,6 @@ import {
         }))
       }
 
-      // if the transaction is a Mint, but the NFT is minted to an address that is NOT the transaction sender
-      // this might not always be malicious in the case of an airdrop where an artist mints directly to receivers of the airdrop
-      if (isMint && !isSenderAlsoReceiver){
-        findings.push(Finding.fromObject({
-          name: "Sleep Minted an NFT",
-          description: `An NFT was minted to ${transferToAddress} but the mint transaction was sent by ${txnSender}. The NFT contract address is ${contractAddress}`,
-          alertId: "SLEEPMINT-2",
-          severity: FindingSeverity.Info,
-          type: FindingType.Suspicious
-        }))
-      }
-
 
     }
   

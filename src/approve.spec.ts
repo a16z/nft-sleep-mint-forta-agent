@@ -34,6 +34,8 @@ import {
   
     describe("handleTransaction", () => {
   
+
+
       it("returns a finding of an approval mismatch", async () => {
   
         const mockERC721ApproveEvent = {
@@ -52,7 +54,7 @@ import {
           Finding.fromObject({
             name: "Sleep Minted an NFT",
             description: `An NFT was approved for ${txnSender}, by ${txnSender}, but owned by ${famousArtist}. The NFT contract address is 0x23414f4f9cb421b952c9050f961801bb2c8b8d58`,
-            alertId: "SLEEPMINT-3",
+            alertId: "SLEEPMINT-2",
             severity: FindingSeverity.Medium,
             type: FindingType.Suspicious
            }),
@@ -60,6 +62,8 @@ import {
    
         expect(mockTxEvent.filterLog).toHaveBeenCalledTimes(1);
       })
+
+
 
       it("returns a finds if the approval for all event fires", async () => {
 
@@ -79,7 +83,7 @@ import {
             Finding.fromObject({
               name: "Sleep Minted an NFT",
               description: `An NFT was approved for ${txnSender}, by ${txnSender}, but owned by ${famousArtist}. The NFT contract address is 0x23414f4f9cb421b952c9050f961801bb2c8b8d58`,
-              alertId: "SLEEPMINT-3",
+              alertId: "SLEEPMINT-2",
               severity: FindingSeverity.Medium,
               type: FindingType.Suspicious
              }),
@@ -89,6 +93,7 @@ import {
       })  
 
 
+      
       it("returns no findings if actual owner approves another person to transfer the NFT", async () => {
         
         const mockERC721ApproveEvent = {

@@ -36,7 +36,7 @@ import {
           findings.push(Finding.fromObject({
             name: "Sleep Minted an NFT",
             description: `An NFT was approved for ${txnSender}, by ${txnSender}, but owned by ${currentNFTOwner}. The NFT contract address is ${contractAddress}`,
-            alertId: "SLEEPMINT-3",
+            alertId: "SLEEPMINT-2",
             severity: FindingSeverity.Medium,
             type: FindingType.Suspicious
           })) 
