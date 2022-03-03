@@ -21,8 +21,8 @@ Documentation for how to build your own Forta Agent can be found [here](https://
 ## Alerts
 
 - SLEEPMINT-1
-  - Fired when an NFT is transferred by an address that is not the owner of the NFT.
-      - i.e., the transaction sender != the transferFrom argument in an emitted Transfer() event 
+  - Fired when an NFT is transferred by an address that is not the owner of the NFT according to an NFT Transfer event.
+      - i.e., the transaction sender != the `from` argument in an emitted Transfer() event 
   - Severity is always set to "info" 
       - This type of transfer may be OK. There are cases where an address is approved to transfer an NFT on another person's behalf.
   - Type is always set to "suspicious"

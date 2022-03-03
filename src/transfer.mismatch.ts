@@ -26,7 +26,7 @@ import {
       const transferFromAddress = transfer.args.from.toLowerCase()
       const transferToAddress = transfer.args.to.toLowerCase()
 
-      // is the transaction sender not the owner of the NFT
+      // is the transaction sender not the owner of the NFT according to the NFT Transfer Event
       let isSenderNotTheOwner = transferFromAddress != txnSender
 
       // is the NFT transfer a mint transfer (i.e., initial creation of the NFT from the 0 address)
